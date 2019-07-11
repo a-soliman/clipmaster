@@ -7,7 +7,7 @@
     "start": "electron ."
   },
   "repository": "git@github.com:stevekinney/clipmaster.git",
-  "author": "Steve Kinney <hello@stevekinney.net> (http://stevekinney.net)",
+  "author": "Ahmed Soliman <ahmed.soliman@programmer.net> (http://a-soliman.com)",
   "license": "MPLv2",
   "dependencies": {
     "electron": "1.8.2"
