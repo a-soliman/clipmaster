@@ -1,4 +1,4 @@
-const  { app, Tray, Menu, systemPreferences, clipboard } = require('electron');
+const  { app, Tray, Menu, systemPreferences, clipboard, globalShortcut } = require('electron');
 const path = require('path');
 
 const clippings  = [];
@@ -16,6 +16,26 @@ app.on('ready' , () => {
 
   if (process.platform === 'win32') {
     tray.on('click', tray.popUpContextMenu);
+  }
+
+  const activationShortcut = globalShortcut.register(
+    'CommandOrControl+Option+C', () => {
+      tray.popUpContextMenu();
+    }
+  );
+
+  if (!activationShortcut) {
+    console.error('Global activation shortcut failed to register.');
+  }
+
+  const newClippingShortcut = globalShortcut.register(
+    'CommandOrControl+Shift+Option+C', () => {
+      addClipping();
+    }
+  );
+
+  if (!newClippingShortcut) {
+    console.log('Global new clipping shortcut failed to register.');
   }
 
   updateMenu();
