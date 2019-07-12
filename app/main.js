@@ -30,11 +30,7 @@ const updateMenu = () => {
       accelerator: 'CommandOrControl+shift+C'
     },
     { type: 'separator' },
-    ...clippings.map((clipping, index) => ({
-      label: clipping,
-      accelerator: `CommandOrControl+${index}`,
-      click() { writeClipping(clipping); }
-    })),
+    ...clippings.slice(0, 10).map(createClippingMenuItem),
     { type: 'separator' },
     {
       label: 'Quit',
@@ -43,6 +39,14 @@ const updateMenu = () => {
     }
   ]);
   tray.setContextMenu(menu);
+};
+
+const createClippingMenuItem = (clipping, index) => {
+  return {
+    label: clipping,
+    accelerator: `CommandOrControl+${index}`,
+    click() { writeClipping(clipping); }
+  };
 };
 
 const addClipping = () => {
