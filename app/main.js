@@ -4,7 +4,8 @@ const path = require('path');
 let tray = null;
 
 app.on('ready' , () => {
-  tray = new Tray(path.join(__dirname, '/Icon.png'));
+  if (app.dock) app.dock.hide();
+  tray = new Tray(path.join(__dirname, getIcon()));
 
   if (process.platform === 'win32') {
     tray.on('click', tray.popUpContextMenu);
@@ -16,4 +17,7 @@ app.on('ready' , () => {
 
   tray.setToolTip('Clipmaster');
   tray.setContextMenu(menu);
+
 });
+
+const getIcon = () => process.platform === 'win32' ? 'icon-light2x.ico' : 'icon-dark.png';
