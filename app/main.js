@@ -30,7 +30,12 @@ const updateMenu = () => {
       accelerator: 'CommandOrControl+shift+C'
     },
     { type: 'separator' },
-    ...clippings.map((clipping) => ({ label: clipping })),
+    ...clippings.map((clipping, index) => ({
+      label: clipping,
+      accelerator: `CommandOrControl+${index}`,
+      click() { writeClipping(clipping); }
+    })),
+    { type: 'separator' },
     {
       label: 'Quit',
       click() { app.quit(); },
@@ -42,7 +47,13 @@ const updateMenu = () => {
 
 const addClipping = () => {
   const clipping = clipboard.readText();
-  clippings.push(clipping);
-  updateMenu();
+  if(clipping !== clippings[clippings.length -1]) {
+    clippings.push(clipping);
+    updateMenu();
+  }
   return clipping;
+};
+
+const writeClipping = (clipping) => {
+  clipboard.writeText(clipping);
 };
