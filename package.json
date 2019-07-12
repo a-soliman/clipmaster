@@ -10,7 +10,8 @@
   "author": "Ahmed Soliman <ahmed.soliman@programmer.net> (http://a-soliman.com)",
   "license": "MPLv2",
   "dependencies": {
-    "electron": "1.8.2"
+    "electron": "1.8.2",
+    "eslint-plugin-import": "^2.18.0"
   },
   "devDependencies": {
     "eslint": "4.17.0"

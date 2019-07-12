@@ -20,13 +20,18 @@
   ],
 
   "rules": {
+    "quotes": [2, "single"],
+    "semi": [2, "always"],
+    "no-console": [ 0 ],
+    "no-trailing-spaces": [ 0 ],
+    "no-param-reassign": [ 0 ],
+    "no-unused-expressions": [ 0 ],
     "comma-dangle": ["error", {
       "arrays": "only-multiline",
       "objects": "only-multiline",
       "imports": "only-multiline",
       "exports": "only-multiline",
       "functions": "only-multiline"
-    }],
-    "no-console": "off"
+    }]
   }
 }

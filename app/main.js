@@ -1,4 +1,4 @@
-const  { app, Tray, Menu } = require('electron');
+const  { app, Tray, Menu, systemPreferences } = require('electron');
 const path = require('path');
 
 let tray = null;
@@ -20,4 +20,8 @@ app.on('ready' , () => {
 
 });
 
-const getIcon = () => process.platform === 'win32' ? 'icon-light2x.ico' : 'icon-dark.png';
+const getIcon = () => {
+  if (process.platform === 'win32') return 'icon-light2x.ico';
+  if (systemPreferences.isDarkMode()) return 'icon-light.png';
+  return 'icon-dark.png';
+};
