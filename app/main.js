@@ -14,6 +14,7 @@ const getIcon = () => {
 app.on('ready' , () => {
   if (app.dock) app.dock.hide();
   tray = new Tray(path.join(__dirname, getIcon()));
+  tray.setPressedImage(path.join(__dirname, 'icon-light.png'));
 
   if (process.platform === 'win32') {
     tray.on('click', tray.popUpContextMenu);
