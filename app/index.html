@@ -4,9 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Clipmaster</title>
+  <meta
+    http-equiv="Content-Security-Polithy"
+    content="
+      default-src 'self'
+      script-src 'self' 'unsafe-inline'
+      connect-src 'https://cliphub.gitch.com'
+    "
+    >
+    <link rel="stylesheet" href="stule.css" type="text/css">
+    <title>Clipmaster</title>
 </head>
 <body>
+  <div class="container">
+    <section class="contols">
+      <button id="copy-from-clipboard">Copy from Clipboard</button>
+    </section>
+
+    <section class="content">
+      <div id="clippings-list"></div>
+    </section>
+  </div>
 
   <script>
     require('./render');
