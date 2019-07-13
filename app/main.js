@@ -1,6 +1,7 @@
-const  { app, Tray, Menu, systemPreferences, clipboard, globalShortcut } = require('electron');
+const  { app, Tray, Menu, systemPreferences, clipboard, globalShortcut, BrowserWindow } = require('electron');
 const path = require('path');
 
+let browserWindow = null;
 const clippings  = [];
 let tray = null;
 
@@ -18,6 +19,12 @@ app.on('ready' , () => {
     tray.on('click', tray.popUpContextMenu);
   }
 
+  browserWindow = new BrowserWindow({
+    show: false
+  });
+
+  browserWindow.loadURL(`file://${__dirname}/index.html`);
+
   const activationShortcut = globalShortcut.register(
     'CommandOrControl+Option+C', () => {
       tray.popUpContextMenu();
@@ -30,7 +37,12 @@ app.on('ready' , () => {
 
   const newClippingShortcut = globalShortcut.register(
     'CommandOrControl+Shift+Option+C', () => {
-      addClipping();
+      const clipping = addClipping();
+      browserWindow.webContents.send(
+        'show-notification',
+        'Clipping Added',
+        clipping
+      );
     }
   );
 
