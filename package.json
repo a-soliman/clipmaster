@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
-  "repository": "git@github.com:stevekinney/clipmaster.git",
+  "repository": "git@github.com:a-soliman/clipmaster.git",
   "author": "Ahmed Soliman <ahmed.soliman@programmer.net> (http://a-soliman.com)",
   "license": "MPLv2",
   "dependencies": {
