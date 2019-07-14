@@ -8,7 +8,7 @@ ipcRenderer.on('create-new-clipping', () => {
 ipcRenderer.on('write-to-clipboard', () => {
   const clipping = clippingsList.firstChild();
   writeToClipboard(getClippingText(clipping));
-  new Notification('Clippng Wrote', { body: getClippingText(clipping)});
+  new Notification('Clippng Wrote', { body: getClippingText(clipping) });
 });
 
 const clippingsList = document.getElementById('clippings-list');
@@ -20,7 +20,7 @@ const addClippingToList = () => {
   clippingsList.prepend(clippingElement);
 };
 
-const createClippingElement = (clippingText) => {
+const createClippingElement = clippingText => {
   const clippingElement = document.createElement('article');
 
   clippingElement.classList.add('clippings-list-item');
@@ -41,7 +41,7 @@ const getButtonParent = ({ target }) => {
   return target.parentNode.parentNode;
 };
 
-const getClippingText = (clippingListItem) => {
+const getClippingText = clippingListItem => {
   return clippingListItem.querySelector('.clipping-text').innerText;
 };
 
@@ -53,23 +53,7 @@ const writeToClipboard = text => {
   clipboard.writeText(text);
 };
 
-const displayNotification = (type, clipping) => {
-  let content = '';
-  switch(type) {
-    case 'copy':
-      content = `Copyed to clipboard: ${clipping}`;
-      break;
-    case 'delete':
-      content = `Removed: ${clipping}`;
-      break;
-    case 'add':
-      content = `Added to clipboard: ${clipping}`;
-  }
-
-  const notification = new Notification(content);
-};
-
-clippingsList.addEventListener('click', (evt) => {
+clippingsList.addEventListener('click', evt => {
   const hasClass = className => {
     return evt.target.classList.contains(className);
   };
