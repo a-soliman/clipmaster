@@ -18,7 +18,7 @@ const createClippingElement = (clippingText) => {
     <div class='clipping-control'>
       <button class='copy-clipping'>&rarr; Clipboard</button>
       <button class='publish-clipping'>Publish</button>
-      <button class=''remove-clipping>Remove</div>
+      <button class='remove-clipping'>Remove</button>
     </div>
   `;
   clippingElement.querySelector('.clipping-text').innerText = clippingText;
@@ -26,4 +26,17 @@ const createClippingElement = (clippingText) => {
   return clippingElement;
 };
 
+const removeClipping = target => {
+  target.parentNode.parentNode.remove();
+};
+
+clippingsList.addEventListener('click', (evt) => {
+  const hasClass = className => {
+    return evt.target.classList.contains(className);
+  };
+
+  if (hasClass('remove-clipping')) removeClipping(evt.target);
+  if (hasClass('publish-clipping')) alert('Publish clipping');
+  if (hasClass('copy-clipping')) alert('Copy clipping');
+});
 copyFromClipboardButton.addEventListener('click', addClippingToList);
