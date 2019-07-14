@@ -1,4 +1,15 @@
-const { clipboard } = require('electron');
+const { clipboard, ipcRenderer } = require('electron');
+
+ipcRenderer.on('create-new-clipping', () => {
+  addClippingToList();
+  new Notification('Clipping Added', { body: clipboard.readText() });
+});
+
+ipcRenderer.on('write-to-clipboard', () => {
+  const clipping = clippingsList.firstChild();
+  writeToClipboard(getClippingText(clipping));
+  new Notification('Clippng Wrote', { body: getClippingText(clipping)});
+});
 
 const clippingsList = document.getElementById('clippings-list');
 const copyFromClipboardButton = document.getElementById('copy-from-clipboard');

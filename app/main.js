@@ -1,15 +1,29 @@
+const { globalShortcut } = require('electron');
 const Menubar = require('menubar');
-const menubar = Menubar();
+const menubar = Menubar({
+  preloadWindow: true,
+  index: `file://${__dirname}/index.html`
+});
 
 menubar.on('ready', () => {
   console.log('application is ready');
+
+  const createClipping = globalShortcut.register('CommandOrControl+!', () => {
+    menubar.window.webContents.send('create-new-clipping');
+  });
+
+  const writeClipping = globalShortcut.register('CmdOrCtrl+Alt+@', () => {
+    menubar.window.webContents.send('write-to-clipboard');
+  });
+
+  if (!createClipping) {
+    console.error('Registration Failed ', 'createClipping');
+  }
+
+  if (!writeClipping) {
+    console.error('Rigistration Failed ', 'writeClipping');
+  }
 });
-
-menubar.on('after-create-window', () => {
-  menubar.window.loadURL(`file://${__dirname}/index.html`);
-});
-
-
 
 
 // const  { app, Tray, Menu, systemPreferences, clipboard, globalShortcut, BrowserWindow } = require('electron');
