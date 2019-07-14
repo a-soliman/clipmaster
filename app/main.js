@@ -1,5 +1,6 @@
-const { globalShortcut } = require('electron');
+const { globalShortcut, Menu } = require('electron');
 const Menubar = require('menubar');
+
 const menubar = Menubar({
   preloadWindow: true,
   index: `file://${__dirname}/index.html`
@@ -7,6 +8,10 @@ const menubar = Menubar({
 
 menubar.on('ready', () => {
   console.log('application is ready');
+
+  menubar.tray.on('right-click', () => {
+    menubar.tray.popUpContextMenu(secondaryMenu);
+  });
 
   const createClipping = globalShortcut.register('CommandOrControl+!', () => {
     menubar.window.webContents.send('create-new-clipping');
@@ -24,6 +29,14 @@ menubar.on('ready', () => {
     console.error('Rigistration Failed ', 'writeClipping');
   }
 });
+
+const secondaryMenu = Menu.buildFromTemplate([
+  {
+    label: 'Quit',
+    click() { menubar.app.quit(); },
+    accelerator: 'CommanOrControl+Q'
+  }
+]);
 
 
 // const  { app, Tray, Menu, systemPreferences, clipboard, globalShortcut, BrowserWindow } = require('electron');
