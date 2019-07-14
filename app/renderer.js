@@ -38,6 +38,10 @@ const removeClipping = target => {
   target.remove();
 };
 
+const writeToClipboard = text => {
+  clipboard.writeText(text);
+};
+
 clippingsList.addEventListener('click', (evt) => {
   const hasClass = className => {
     return evt.target.classList.contains(className);
@@ -47,7 +51,7 @@ clippingsList.addEventListener('click', (evt) => {
   const clippingText = getClippingText(clippingListItem);
 
   if (hasClass('remove-clipping')) removeClipping(clippingListItem);
-  if (hasClass('publish-clipping')) alert(clippingText);
+  if (hasClass('publish-clipping')) writeToClipboard(clippingText);
   if (hasClass('copy-clipping')) alert(clippingText);
 });
 
