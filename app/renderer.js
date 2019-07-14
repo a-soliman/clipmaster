@@ -42,6 +42,22 @@ const writeToClipboard = text => {
   clipboard.writeText(text);
 };
 
+const displayNotification = (type, clipping) => {
+  let content = '';
+  switch(type) {
+    case 'copy':
+      content = `Copyed to clipboard: ${clipping}`;
+      break;
+    case 'delete':
+      content = `Removed: ${clipping}`;
+      break;
+    case 'add':
+      content = `Added to clipboard: ${clipping}`;
+  }
+
+  const notification = new Notification(content);
+};
+
 clippingsList.addEventListener('click', (evt) => {
   const hasClass = className => {
     return evt.target.classList.contains(className);
