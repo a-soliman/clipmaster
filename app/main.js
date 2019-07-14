@@ -6,7 +6,6 @@ menubar.on('ready', () => {
 });
 
 menubar.on('after-create-window', () => {
-  console.log(`file://${__dirname}/index.html`);
   menubar.window.loadURL(`file://${__dirname}/index.html`);
 });
 
