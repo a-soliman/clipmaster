@@ -26,8 +26,16 @@ const createClippingElement = (clippingText) => {
   return clippingElement;
 };
 
+const getButtonParent = ({ target }) => {
+  return target.parentNode.parentNode;
+};
+
+const getClippingText = (clippingListItem) => {
+  return clippingListItem.querySelector('.clipping-text').innerText;
+};
+
 const removeClipping = target => {
-  target.parentNode.parentNode.remove();
+  target.remove();
 };
 
 clippingsList.addEventListener('click', (evt) => {
@@ -35,8 +43,12 @@ clippingsList.addEventListener('click', (evt) => {
     return evt.target.classList.contains(className);
   };
 
-  if (hasClass('remove-clipping')) removeClipping(evt.target);
-  if (hasClass('publish-clipping')) alert('Publish clipping');
-  if (hasClass('copy-clipping')) alert('Copy clipping');
+  const clippingListItem = getButtonParent(evt);
+  const clippingText = getClippingText(clippingListItem);
+
+  if (hasClass('remove-clipping')) removeClipping(clippingListItem);
+  if (hasClass('publish-clipping')) alert(clippingText);
+  if (hasClass('copy-clipping')) alert(clippingText);
 });
+
 copyFromClipboardButton.addEventListener('click', addClippingToList);
