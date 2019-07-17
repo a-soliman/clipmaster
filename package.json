@@ -4,7 +4,8 @@
   "description": "A clipboard manager built in Electron.",
   "main": "app/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "mocha"
   },
   "repository": "git@github.com:a-soliman/clipmaster.git",
   "author": "Ahmed Soliman <ahmed.soliman@programmer.net> (http://a-soliman.com)",
