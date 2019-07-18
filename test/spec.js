@@ -5,19 +5,41 @@ const electronPath = require('electron');
 
 const app = new Application({
   path: electronPath,
-  args: [path.join(__dirname, '..')]
+  args: [path.join(__dirname, '..')],
+  webdriverOptions: {
+    deprecationWarnings: false
+  }
 });
 
-describe('Clipmaster', () => {
+const openApp = new Promise((resolve) => {
+  app.start();
+  setTimeout(() => {
+    console.log('Now')
+    resolve();
+  }, 5000);
+});
+
+describe('Clipmaster', function() {
   this.timeout(10000);
 
-  beforeEach(() => {
-    return app.start();
+  beforeEach(function() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        app.start();
+        // console.log('Now');
+        resolve();
+      }, 1000);
+    });
   });
 
-  afterEach(() => {
+  afterEach(function() {
     if (app && app.isRunning()) {
-      return app.stop();
+      app.stop();
     }
   });
+
+
+  });
 });
+
+

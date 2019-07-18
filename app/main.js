@@ -8,6 +8,7 @@ const menubar = Menubar({
 
 menubar.on('ready', () => {
   console.log('application is ready');
+  menubar.showWindow();
 
   menubar.tray.on('right-click', () => {
     menubar.tray.popUpContextMenu(secondaryMenu);
