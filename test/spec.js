@@ -38,8 +38,13 @@ describe('Clipmaster', function() {
     }
   });
 
+  it('shows an initial window', async () => {
+    const count = await app.client.getWindowCount();
+    return assert.equal(count, 1);
 
   });
+
+
 });
 
 
