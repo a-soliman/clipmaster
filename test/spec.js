@@ -44,7 +44,10 @@ describe('Clipmaster', function() {
 
   });
 
-
+  it('has the correct title', async() => {
+    const title = await app.client.waitUntilWindowLoaded().getTitle();
+    return assert.equal(title, 'Clipmasterd');
+  });
 });
 
 
