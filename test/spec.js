@@ -48,6 +48,12 @@ describe('Clipmaster', function() {
     const title = await app.client.waitUntilWindowLoaded().getTitle();
     return assert.equal(title, 'Clipmasterd');
   });
+
+  it('Does not have the developer tool opened', async() => {
+    const devToolsAreOpen = await app.client.waitUntilWindowLoaded().browserWindow.isDevToolsOpened();
+
+    return assert.equal(devToolsAreOpen, false);
+  });
 });
 
 
