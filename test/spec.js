@@ -14,7 +14,6 @@ const app = new Application({
 const openApp = new Promise((resolve) => {
   app.start();
   setTimeout(() => {
-    console.log('Now')
     resolve();
   }, 5000);
 });
@@ -32,14 +31,9 @@ describe('Clipmaster', function() {
     });
   });
 
-  afterEach(function() {
-    if (app && app.isRunning()) {
-      app.stop();
-    }
-  });
-
   it('shows an initial window', async () => {
     const count = await app.client.getWindowCount();
+
     return assert.equal(count, 1);
 
   });
